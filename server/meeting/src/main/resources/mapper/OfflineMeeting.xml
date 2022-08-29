@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.format_project.meeting.mapper.OfflineMeetingMapper">
+
+    <!-- 利用resultMap自定义返回值类型 -->
+    <resultMap id="offlineMeetingCountResult" type="java.util.Map">
+        <result column="roomId" property="roomId" />
+        <result column="count" property="count" jdbcType="INTEGER" />
+    </resultMap>
+    <resultMap id="offlineMeetingResult" type="com.format_project.meeting.model.entity.OfflineMeeting">
+        <result column="meetingId" property="meetingId" />
+        <result column="roomId" property="roomId" />
+        <result column="roomname" property="roomname" />
+        <result column="userId" property="userId" />
+        <result column="username" property="username" />
+        <result column="title" property="title" />
+        <result column="meetingDate" property="meetingDate" />
+        <result column="startTime" property="startTime" />
+        <result column="endTime" property="endTime" />
+        <!-- SqlTimestampTypeHandler可以将数据库中的datetime类型数据转换成时间戳，以毫秒显示 -->
+        <result column="createTime" property="createTime" />
+        <result column="description" property="description" />
+        <result column="member" property="member" typeHandler="com.format_project.meeting.bean.TypeHandler.ArrayStringTypeHandler" />
+        <result column="memberCount" property="memberCount" />
+    </resultMap>
+
+    <resultMap id="roomJoinMeetingResult" type="java.util.Map" extends="offlineMeetingResult">
+        <result column="troomId" property="troomId" />
+        <result column="troomname" property="troomname" />
+    </resultMap>
+
+    <resultMap id="roomBookDetail" type="com.format_project.meeting.model.dto.RoomBookDetail" extends="offlineMeetingResult">
+        <!-- column 作为子查询结果集的对外列名，但也可以接收参数，来自父查询的字段 -->
+        <!-- 等式左边是select语句的行内参数名，即#{}，右边是column名 -->
+        <association property="meetingRoom" column="roomId" javaType="com.format_project.meeting.model.entity.MeetingRoom">
+            <result property="description" column="roomDescription"/>
+            <result property="scale" column="roomScale"/>
+            <result property="contact" column="roomContact" />
+        </association>
+        <association property="user" column="userId" javaType="com.format_project.meeting.model.entity.User">
+            <result property="truename" column="truename" />
+            <result property="phone" column="userPhone" />
+            <result property="email" column="userEmail" />
+        </association>
+    </resultMap>
+
+
+    <!-- 此处可以用resultMap或者resultType，设置为Map，属性名为key，属性值为value -->
+    <select id="OfflineMeetingCountByDate" parameterType="String" resultMap="offlineMeetingCountResult">
+    SELECT roomId,m.count AS count FROM (SELECT roomId,count(*) AS count FROM offline_meeting WHERE meetingDate=#{date} GROUP BY roomId UNION ALL SELECT roomId,0 FROM meetingroom)AS m GROUP BY roomId;
+    </select>
+
+    <select id="selectDayMeetingByRD" resultMap="roomJoinMeetingResult">
+    SELECT meetingroom.roomId AS troomId,meetingroom.roomname AS troomname,offline_meeting.* FROM 
+meetingroom LEFT JOIN offline_meeting ON meetingroom.roomId = offline_meeting.roomId AND 
+meetingDate = #{date} WHERE meetingroom.roomId = #{roomId};
+    </select>
+    <select id="selectMonthMeetingByRM" resultType="com.format_project.meeting.model.entity.OfflineMeeting">
+    SELECT * FROM offline_meeting WHERE roomId=#{roomId} AND SUBSTR(meetingDate,6,2)=#{month};
+    </select>
+    <select id="selectMyRoomBookInfo" resultType="com.format_project.meeting.model.entity.OfflineMeeting">
+    SELECT * FROM offline_meeting WHERE userId=#{userId} AND meetingDate=#{date}
+    </select>
+    <!-- 虽然用了association 但最终设定的数据库字段会与开发人员在select语句设定的最终字段保持一致 -->
+    <select id="selectRoomBookDetail" parameterType="String" resultMap="roomBookDetail">
+        SELECT meetingroom.roomDescription,meetingroom.scale AS roomScale,
+meetingroom.contact AS roomContact,`user`.email AS userEmail,`user`.phone AS userPhone,`user`.truename,
+offline_meeting.* 
+FROM meetingroom,`user`,offline_meeting WHERE meetingId=#{meetingId} AND offline_meeting.roomId=meetingroom.roomId AND 
+offline_meeting.userId = `user`.userId
+    </select>
+    <select id="selectMeetingBetweenTime" resultMap="offlineMeetingResult">
+    SELECT * FROM offline_meeting WHERE unix_timestamp(startTime) &lt;= unix_timestamp(#{startTime}) 
+    AND unix_timestamp(endTime) &gt;= unix_timestamp(#{endTime}) AND roomId=#{roomId}
+    </select>
+
+    <!-- 若想使用自增主键，请在数据库中同步设置 -->
+    <insert id="insertOfflineMeetingInfo" parameterType="com.format_project.meeting.model.entity.OfflineMeeting" >
+    INSERT INTO offline_meeting (meetingId,roomId,roomname,userId,username,title,meetingDate,startTime,endTime,
+    createTime,description,member,memberCount)VALUES(uuid(),#{roomId},#{roomname},#{userId},#{username} ,#{title},#{meetingDate},#{startTime},#{endTime},#{createTime},#{description},#{member,typeHandler=com.format_project.meeting.bean.TypeHandler.ArrayMemberTypeHandler},#{memberCount});
+    </insert>
+
+    <delete id="deleteMyRoomBookInfo" parameterType="String">
+    DELETE FROM offline_meeting WHERE meetingId=#{meetingID} 
+    </delete>
+
+    <update id="updateMyRoomBookInfo" parameterType="com.format_project.meeting.model.entity.OfflineMeeting">
+    UPDATE offline_meeting SET meetingDate=#{meetingDate},startTime=#{startTime},
+    endTime=#{endTime},createTime=#{createTime},title=#{title},description=#{description}
+    ,member=#{member,typeHandler=com.format_project.meeting.bean.TypeHandler.ArrayMemberTypeHandler}
+    memberCount=#{memberCount} WHERE meetingId=#{meetingId}
+    </update>
+
+
+
+</mapper>

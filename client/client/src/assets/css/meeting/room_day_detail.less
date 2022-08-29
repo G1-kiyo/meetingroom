@@ -1,0 +1,60 @@
+@import "../global.less";
+@import "../var.less";
+
+.room {
+    background-color: @color_bg_green;
+    display: grid;
+    grid-template-columns: calc(100% - 300px) 300px;
+    grid-template-rows: 100%;
+    grid-template-areas: "detail book";
+
+    // 会议预约详情
+    &detail {
+        grid-area: detail;
+
+        // 导航栏
+        
+        // 主要会议预约信息
+        &_main {
+            padding-left: 20px;
+            display: grid;
+            grid-template-rows: 50px calc(100% - 50px);
+            grid-template-areas: "operation""info";
+
+        }
+
+        // 操作区
+        &_operation {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            grid-area: operation;
+
+            // 日期栏
+            &_dategroup{
+                flex:2
+            }
+
+            // 仅调整day
+            &_daymodify {
+                flex: 2;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+            }
+
+            // 日期切换
+            &_switch{
+                flex-grow:1
+            }
+        }
+
+        &_info {
+            grid-area: info;
+            position: relative;
+        }
+    }
+}
+

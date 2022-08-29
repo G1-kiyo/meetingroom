@@ -1,0 +1,42 @@
+body{
+    background-image: url("../asset/img/email_background.jpg");
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+div{
+    
+    /* position: absolute;
+    width:600px;
+    height:500px;
+    left:50%;
+    top:50%;
+    margin-left: -300px;
+    margin-top: -250px;
+    border:none; */
+}
+h1,p{ 
+    text-align: center;
+    font-size:16px;
+    font-weight:bold;
+    color:white;
+
+}
+p{
+    margin-bottom:20px;
+}
+button{
+    width:215px;
+    height:52px;
+    background-color: #00008B;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    margin-top:30px;
+}
+a{
+    text-decoration: none;
+}

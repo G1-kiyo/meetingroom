@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:remove="all">Template for HTML email with inline image</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <!-- 为了防止csrf等攻击，会将电子邮件的外部文件（比如css等）删除 -->
+    <!-- 另外针对pc端邮箱、mobile邮箱和web邮箱，css的样式设置生效会有一定的限制，具体可查看https://www.campaignmonitor.com/css/link-element/link-in-head 网址 -->
+    <!-- 若要以html格式发送邮件，最好用table，直接用div可能会导致布局错乱 -->
+    <!-- 无法通过background插入背景图片，img可以通过src插入图片 -->
+    <table >
+        <tr>
+            <td>
+                <h1 style="text-align:center;font-size:20px;font-weight:bold;">Forgot Your Password?</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p style="text-align:left;font-size:16px">Dear [[${username}]]:</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p style="text-align:left;font-size:16px">We've received a request to reset the password for this email address.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p style="text-align:left;font-size:16px"> To reset your password please click on the Reset password button. (The button expires in 4 hours).</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p style="text-align:left;font-size:16px">  The button will take you to a secure page where you can change your 
+                    password. If you don't want to reset your password, please ignore this
+                     message. Your password will not be reset.</p>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                <table style="background-color:#00008B;padding:12px;border:none;border-radius:5px;margin:auto">
+                    <tr>
+                        <td>
+                            <a style="text-decoration: none;font-size: 14px;color:white" th:href="@{${password_reset_address}}">[[${button_text}]]</a>
+                        </td>
+                    </tr>
+                </table>
+                
+            </td>
+        </tr>
+    </table>
+  </body>
+</html>

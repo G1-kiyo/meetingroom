@@ -1,0 +1,167 @@
+@import "../global";
+@import "../var";
+
+
+
+.login {
+    background-image: url("../../img/loginBackground.jpg");
+    background-size: 50% 100%;
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 100%;
+    width:100%;
+    position:fixed;
+
+    &_main-section {
+        display: flex;
+        // flex-direction: row;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        float: left;
+    }
+
+    // 登录弹出提示
+    /* &_tip_success {
+        .mixin_tips(244px, @color_red);
+    }
+
+    &_tip_fail {
+        .mixin_tips(325px, @color_light_green);
+    }
+    &_tip_fade{
+        opacity: 0;
+    } */
+}
+
+// logo
+.logo {
+    width: @logo_width;
+    height: @logo_height;
+}
+
+// 登录表单
+.input(@height) {
+    // display: block;
+    width: 100%;
+    height: @height;
+    border: 0.8px solid;
+    border-radius: 8px;
+
+    // opacity      : 0.5
+}
+
+
+.login-form {
+    // margin-top: 128px;
+    width: 242px;
+
+    // margin-left: 50px;
+    &_password,
+    &_account {
+        position: relative;
+    }
+
+
+    &_account {
+        &>div {
+
+            // position:relative;
+            &>input {
+                .input(40px)
+            }
+        }
+
+
+        &>div>input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0px 1000px white inset;
+        }
+
+        &>div>input:focus {
+            // .input(43px);
+            transition: height 0.3s
+        }
+    }
+
+
+    &_password {
+        margin-top: 50px;
+
+        &>input {
+            .input(40px)
+        }
+
+        &>input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0px 1000px white inset;
+        }
+
+        &>input:focus {
+            // .input(43px);
+            transition: height 0.3s
+        }
+    }
+
+    .account,
+    .password {
+        &_td_unfocused {
+            position: absolute;
+            top: 25%;
+            // float   : left;
+            left: 0;
+            height: 14px;
+        }
+
+        &_td_focused {
+            margin-bottom: 5px;
+            float: left;
+            height: 14px;
+            transition: all 0.3s // animation    : upMove 0.3s;
+        }
+
+        &_warning {
+            color: @color_red;
+            float: left;
+        }
+
+        &_placeholder {
+            position: absolute;
+            bottom: 15%;
+            left: 0;
+            color: @color_grey;
+            float: left;
+        }
+    }
+
+
+}
+
+
+
+// 找回密码的链接
+.forget_pwd {
+    margin-top: 20px;
+    float: right;
+
+    &>a {
+        color: @color_blue;
+        // text-decoration: none
+    }
+}
+
+// 表单按钮
+.btn {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &_sign-in {
+        .mixin_btn(130px, @btn_height, @color_bold_green, white, 0.5px none, 5px);
+    }
+
+    &_create-account {
+        .mixin_btn(170px, @btn_height, @color_blue, white, 0.5px none, 5px);
+        margin-top: 30px;
+    }
+}

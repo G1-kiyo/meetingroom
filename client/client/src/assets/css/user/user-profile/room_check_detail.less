@@ -1,0 +1,196 @@
+@import "../../var.less";
+@import "../../global.less";
+
+.detail {
+    background-color: @color_bg_green;
+    display: grid;
+    grid-template-columns: 250px auto;
+    grid-template-rows: 50px calc(100% - 50px);
+    grid-template-areas: "sidebar .""sidebar main";
+
+    &_sidebar--outer {
+        grid-area: sidebar
+    }
+}
+
+.roomcheck_info_check {
+    grid-area: main;
+    display: grid;
+    grid-template-rows: 40px auto;
+    grid-template-areas: "breadcrumb""detail";
+}
+
+.check_breadcrumb {
+    grid-area: breadcrumb;
+    margin-left: 15px;
+}
+
+// 细节
+.normal,
+.autostretch {
+    width: 513px;
+    height: 120px;
+    background-color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 15px 0 0 10px;
+    margin-bottom: 15px;
+
+    .checkdetail {
+
+
+
+        // 介绍栏
+        &_intro {
+
+
+            &_roomname {
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                border: none;
+                background-color: #9C16B8;
+                opacity: 0.6;
+                font-size: 40px;
+                text-align: center;
+                line-height: 90px;
+                color: white;
+            }
+
+            &_descriptiongroup {
+                margin-left: 20px;
+
+                &>span:first-child {
+                    font-size: 32px;
+                }
+
+                &>span:nth-child(2) {
+                    font-size: 14px;
+                    color: #999999;
+                    display: block;
+                }
+            }
+        }
+
+        // 用户信息
+        &_userInfo {}
+
+        // 房间信息
+        &_roomInfo {}
+
+        // 审核信息
+        &_bookInfo {
+
+            &_status,
+            &_audition {
+                font-size: 14px;
+                color: #999999;
+                display: block;
+            }
+
+            &_status {
+                margin-top: 20px;
+            }
+
+            &_audition {
+                margin-top: 12px;
+            }
+        }
+
+    }
+}
+
+.autostretch {
+    height: auto;
+
+    .checkdetail_meetingInfo_member {
+        margin-top: 25px;
+
+        &>span {
+            font-size: 16px;
+        }
+    }
+}
+
+.checkdetail {
+    grid-area: detail;
+    padding-left: 34px;
+
+    &_intro {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.edit_title {
+    &>span {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    &>div {
+        margin-left: 25px;
+        display: inline-block;
+        color: #666DC9;
+    }
+}
+
+.itemgroup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 25px;
+
+    .item {
+        flex: 3;
+
+        &>span:first-child {
+            font-size: 16px;
+        }
+
+        &>span:nth-child(2) {
+            font-size: 14px;
+            color: #999999;
+            display: block;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}
+.memberlist{
+    display:flex;
+    flex-direction: center;
+    align-items: center;
+}
+.memberitem {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 13px;
+
+    &_remove {
+        position: absolute;
+        right: 0;
+        top: 20px;
+    }
+
+    &>span {
+        text-align: center;
+        font-size:14px;
+    }
+}
+.member_select {
+    width: 30px;
+    height: 30px;
+    border: 1px dotted #666666;
+    display:inline-block;
+}

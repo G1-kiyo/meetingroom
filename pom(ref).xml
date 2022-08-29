@@ -1,0 +1,255 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <!-- 模型版本4.0.0 -->
+  <modelVersion>4.0.0</modelVersion>
+  <!-- 工程组标识ʶ -->
+  <groupId>com.format_project</groupId>
+  <!-- 工程标识，groupId和artifactId共同标识当前版本的project -->
+  <artifactId>meeting</artifactId>
+  <version>1.0</version>
+   <!--发现依赖和扩展的远程仓库列表。 -->
+  <repositories>
+   <!--包含需要连接到远程仓库的信息 -->
+    <repository>
+     <!--如何处理远程仓库里发布版本的下载。有releases和snapshots两种配置 -->
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <!--远程仓库唯一标识符。可以用来匹配在settings.xml文件里配置的远程仓库 -->
+      <id>central</id>
+      <!--远程仓库名称 -->
+      <name>Central Repository</name>
+      <!--远程仓库URL，按protocol://hostname/path形式 -->
+      <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+  </repositories>
+  <!--发现插件的远程仓库列表，这些插件用于构建和报表 -->
+  <pluginRepositories>
+    <pluginRepository>
+      <releases>
+      <!-- 指定更新发生的频率，有always、daily、interval:X(X以分钟为单位)、never -->
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </pluginRepository>
+  </pluginRepositories>
+  <!--构建项目需要的信息 -->
+  <build>
+  <!-- 项目源码目录 -->
+    <sourceDirectory>D:\format_project_dev\server\src\main\java</sourceDirectory>
+    <!-- 项目脚本源码目录，该目录和源码目录不同：绝大多数情况下，该目录下的内容 
+    会被拷贝到输出目录(因为脚本是被解释的，而不是被编译的)。 -->
+    <scriptSourceDirectory>D:\format_project_dev\server\src\main\scripts</scriptSourceDirectory>
+    <!-- 项目单元测试使用的源码目录 -->
+    <testSourceDirectory>D:\format_project_dev\server\src\test\java</testSourceDirectory>
+    <!--被编译过的应用程序class文件存放的目录。 -->
+    <outputDirectory>D:\format_project_dev\server\target\classes</outputDirectory>
+    <!--被编译过的测试class文件存放的目录。 -->
+    <testOutputDirectory>D:\format_project_dev\server\target\test-classes</testOutputDirectory>
+    <!-- 项目相关的所有资源路径列表 -->
+    <resources>
+      <resource>
+        <directory>D:\format_project_dev\server\src\main\resources</directory>
+      </resource>
+    </resources>
+    <!-- 单元测试相关的所有资源路径 -->
+    <testResources>
+      <testResource>
+        <directory>D:\format_project_dev\server\src\test\resources</directory>
+      </testResource>
+    </testResources>
+    <!--构建产生的所有文件存放的目录 -->
+    <directory>D:\format_project_dev\server\target</directory>
+    <!--产生的构件的文件名，默认值是${artifactId}-${version}。 -->
+    <finalName>meeting-1.0</finalName>
+    <!--子项目可以引用的默认插件信息。该插件配置项直到被引用时才会被解析或绑定到生命周期。
+    给定插件的任何本地配置都会覆盖这里的配置 -->
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.3</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>2.2-beta-5</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>2.8</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5.3</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <!--使用的插件列表 -->
+    <plugins>
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.5</version>
+        <!--在构建生命周期中执行一组目标的配置。每个目标可能有不同的配置。 -->
+        <executions>
+          <execution>
+          <!-- 执行目标的标识符 -->
+            <id>default-clean</id>
+            <!-- 绑定了目标的构建生命周期阶段 -->
+            <phase>clean</phase>
+            <!--配置的执行目标 -->
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <id>default-testResources</id>
+            <phase>process-test-resources</phase>
+            <goals>
+              <goal>testResources</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-resources</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>resources</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+          <execution>
+            <id>default-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <executions>
+          <execution>
+            <id>default-compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-testCompile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.12.4</version>
+        <executions>
+          <execution>
+            <id>default-test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+          <execution>
+            <id>default-install</id>
+            <phase>install</phase>
+            <goals>
+              <goal>install</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.7</version>
+        <executions>
+          <execution>
+            <id>default-deploy</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>deploy</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.3</version>
+        <executions>
+          <execution>
+            <id>default-site</id>
+            <phase>site</phase>
+            <goals>
+              <goal>site</goal>
+            </goals>
+            <!--作为DOM对象的配置 -->
+            <configuration>
+              <outputDirectory>D:\format_project_dev\server\target\site</outputDirectory>
+              <reportPlugins>
+                <reportPlugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-project-info-reports-plugin</artifactId>
+                </reportPlugin>
+              </reportPlugins>
+            </configuration>
+          </execution>
+          <execution>
+            <id>default-deploy</id>
+            <phase>site-deploy</phase>
+            <goals>
+              <goal>deploy</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>D:\format_project_dev\server\target\site</outputDirectory>
+              <reportPlugins>
+                <reportPlugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-project-info-reports-plugin</artifactId>
+                </reportPlugin>
+              </reportPlugins>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <outputDirectory>D:\format_project_dev\server\target\site</outputDirectory>
+          <reportPlugins>
+            <reportPlugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-project-info-reports-plugin</artifactId>
+            </reportPlugin>
+          </reportPlugins>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <reporting>
+    <outputDirectory>D:\format_project_dev\server\target\site</outputDirectory>
+  </reporting>
+</project>

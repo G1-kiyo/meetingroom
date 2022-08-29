@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.format_project.meeting.mapper.PwdResetMapper">
+
+    <insert id="insertPwdResetInfo" parameterType="com.format_project.meeting.model.dto.PwdReset">
+        INSERT INTO pwd_reset(uid,userId,isExpired)VALUES(#{uid},#{userId},#{isExpired})
+    </insert>
+    <update id="updatePwdResetInfo">
+        UPDATE pwd_reset SET isExpired = #{isExpired} WHERE uid = #{uid}
+    </update>
+
+    <select id="selectInfoByUid" parameterType="String" resultType="com.format_project.meeting.model.dto.PwdReset">
+        SELECT * FROM pwd_reset WHERE uid=#{uid}
+    </select>
+
+    <update id="updatePwdByUserId" >
+        UPDATE user SET password=#{password} WHERE userId=#{userId}
+    </update>
+</mapper>

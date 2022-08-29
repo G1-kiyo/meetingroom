@@ -1,0 +1,72 @@
+{
+  "id": "3325699",
+  "name": "format_project_dev",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1876334",
+      "name": "客户群组",
+      "font_class": "kehuqunzu",
+      "unicode": "e673",
+      "unicode_decimal": 58995
+    },
+    {
+      "icon_id": "2076271",
+      "name": "退出",
+      "font_class": "tuichu",
+      "unicode": "e892",
+      "unicode_decimal": 59538
+    },
+    {
+      "icon_id": "53070",
+      "name": "看板任务",
+      "font_class": "kanbanrenwu",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "22960797",
+      "name": "跳转-转曲",
+      "font_class": "tiaozhuan-zhuanqu",
+      "unicode": "e823",
+      "unicode_decimal": 59427
+    },
+    {
+      "icon_id": "687392",
+      "name": "返回",
+      "font_class": "fanhui",
+      "unicode": "e6ff",
+      "unicode_decimal": 59135
+    },
+    {
+      "icon_id": "4485675",
+      "name": "邮箱",
+      "font_class": "youxiang",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "6537200",
+      "name": "手机",
+      "font_class": "shouji",
+      "unicode": "e674",
+      "unicode_decimal": 58996
+    },
+    {
+      "icon_id": "7069157",
+      "name": "箭头-左",
+      "font_class": "jiantou-zuo",
+      "unicode": "e738",
+      "unicode_decimal": 59192
+    },
+    {
+      "icon_id": "6616553",
+      "name": "头像",
+      "font_class": "touxiang",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    }
+  ]
+}

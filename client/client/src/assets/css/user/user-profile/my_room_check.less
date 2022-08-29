@@ -1,0 +1,136 @@
+@import "../../var.less";
+@import "../../global.less";
+
+.roomcheck {
+    background-color: @color_bg_green;
+    display: grid;
+    grid-template-columns: 250px auto;
+    grid-template-rows: 50px calc(100% - 50px);
+    grid-template-areas: "sidebar .""sidebar main";
+
+    &_sidebar--outer {
+        grid-area: sidebar
+    }
+
+    &_info {
+        grid-area: main;
+
+        // 正常页
+        &_index {
+            display: grid;
+            grid-template-rows: 40px auto;
+            grid-template-columns: 60% 40%;
+            grid-template-areas: "nav nav""request datepicker";
+
+            .index {
+
+                // 导航栏
+                &_nav {
+                    grid-area: nav;
+                    margin-left: 40px;
+
+                    &_item {
+                        float: left;
+                        width: 73px;
+                        height: 40px;
+                        border: none;
+                        background-color: #94E671;
+                        opacity: 0.19;
+                        text-align: center;
+                        line-height: 40px;
+                        font-size: 14px;
+                        color: black;
+
+                        &.selected {
+                            color: white;
+                            opacity: 1;
+                        }
+                    }
+
+
+                }
+
+                &_content {
+                    padding: 15px 0 0 15px;
+                    grid-area: request;
+
+                    .main {
+
+                        // 各项请求信息
+                        &_request {
+
+                            width: 60%;
+
+                            // 时间
+                            &_time {
+                                font-size: 30px;
+                                font-family: "Berlin Sans FB";
+                                font-weight: bold;
+                            }
+
+                            &_item {
+                                margin-top: 15px;
+
+                                &>span:first-child {
+                                    display: inline-block;
+                                    color: white;
+                                    border: none;
+                                    border-radius: 3px;
+                                    width: 88px;
+                                    height: 18px;
+                                    font-size: 14px;
+                                    text-align: center;
+                                    line-height: 18px;
+                                    opacity: 0.38
+                                }
+
+                                &>span:nth-child(2) {
+                                    margin-left: 10px
+                                }
+                            }
+
+                            // 按钮组
+                            &_buttongroup {
+                                margin-top: 15px;
+
+                                &.check,
+                                &.delete {
+                                    width: 86px;
+                                    height: 32px;
+                                    font-size: 14px;
+                                    text-align: center;
+                                    line-height: 32px;
+                                    border: none;
+                                    border-radius: 3px;
+                                    display: inline-block;
+                                }
+
+                                &.check {
+                                    background-color: #00008B;
+                                    color: white;
+                                }
+
+                                &.delete {
+                                    background-color: white;
+                                    color: black;
+                                    margin: 0 0 0 10px;
+                                }
+                            }
+                        }
+
+                       
+                    }
+                }
+
+
+            }
+        }
+
+    }
+}
+
+.main_datepicker--outer {
+    padding-top: 15px;
+    grid-area: datepicker;
+}
+

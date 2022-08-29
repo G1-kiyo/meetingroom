@@ -1,0 +1,67 @@
+html,
+body,
+#app {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+
+    &>div:first-child {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+// 提示
+.mixin_tips(@tip_width, @tip_color) {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    width: @tip_width;
+    height: 36px;
+    margin-left: -(@tip_width/2);
+    border-radius: 5px;
+    border: none;
+    opacity: 80%;
+    font-size: 14px;
+    background-color: @tip_color;
+    animation: tips 2s;
+    transition: opacity 3s;
+}
+
+@keyframes tips {
+    0% {
+        top: 0px;
+    }
+
+    100% {
+        top: 35px;
+    }
+}
+
+// 按钮
+.mixin_btn(@width, @height, @bg_color, @font_color, @border, @border-radius) {
+    width: @width;
+    height: @height;
+    background-color: @bg_color;
+    color: @font_color;
+    border: @border;
+    border-radius: @border-radius;
+}
+
+// 字体 更改路径
+/* @font-face {
+    font-family: 'iconfont';
+    src        : url('../icons/iconfont.woff2?t=1650038195816') format('woff2'),
+        url('../icons/iconfont.woff?t=1650038195816') format('woff'),
+        url('../icons/iconfont.ttf?t=1650038195816') format('truetype');
+} */
+
+// 特殊边框
+.mixin_border(@border-style, @color, @height, @width) {
+    border-style: @border-style;
+    border-color: @color;
+    border-width: 1.5px;
+    height: @height;
+    width: @width;
+}
