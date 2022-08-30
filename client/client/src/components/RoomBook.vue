@@ -200,24 +200,28 @@ export default {
         }
       }
       if (submitFlag) {
-        this.$api.uploadRoomBookInfo({
-          data: {
-            roomId: this.roomId,
-            userId: this.userJobInfo.userId,
-            username: this.userJobInfo.username,
-            roomname:
-              this.bookForm.roomname[0].toLowerCase() +
-              this.bookForm.roomname.substring(1),
-            title: this.bookForm.title,
-            description: this.bookForm.description,
-            meetingDate: this.date,
-            startTime: this.date + " " + this.bookStartTime,
-            endTime: this.date + " " + this.bookEndTime,
-            createTime: Date.now(),
-            member: this.selectedMemberKey,
-            memberCount: this.selectedMemberKey.length,
-          },
-        });
+        this.$api
+          .uploadRoomBookInfo({
+            data: {
+              roomId: this.roomId,
+              userId: this.userJobInfo.userId,
+              username: this.userJobInfo.username,
+              roomname:
+                this.bookForm.roomname[0].toLowerCase() +
+                this.bookForm.roomname.substring(1),
+              title: this.bookForm.title,
+              description: this.bookForm.description,
+              meetingDate: this.date,
+              startTime: this.date + " " + this.bookStartTime,
+              endTime: this.date + " " + this.bookEndTime,
+              createTime: Date.now(),
+              member: this.selectedMemberKey,
+              memberCount: this.selectedMemberKey.length,
+            },
+          })
+          .then(() => {
+            store.commit("removeAllMember");
+          });
       } else {
         ElMessage({
           type: "warning",

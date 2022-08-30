@@ -36,6 +36,9 @@ const store = createStore({
             state.selectedMember.splice(i,1)
           }
         }
+      },
+      removeAllMember(state){
+        state.selectedMember = []
       }
     }
   })

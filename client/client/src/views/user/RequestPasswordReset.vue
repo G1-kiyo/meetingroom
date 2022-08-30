@@ -256,8 +256,7 @@ export default {
           .then((res) => {
             if (res.data.password_reset_uid) {
               this.$router.push({
-                path:
-                  "/password_reset/phone/" + res.data.password_reset_uid.substring(7, 16),
+                path: "/password_reset/phone/" + res.data.password_reset_uid,
               });
             }
             // this.$router.addRoute({

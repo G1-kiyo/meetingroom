@@ -141,7 +141,8 @@ public class ApiServiceImpl implements ApiService {
         User userDetails = (User) userDetailsServiceImpl.loadUserByUsername(phone);
         // 将密码重置相关信息写入数据库
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String uid = passwordEncoder.encode(userDetails.getUsername());
+        // String uid = passwordEncoder.encode(userDetails.getUsername());
+        String uid = codeUtil.generateCode(10);
         PwdReset pwdReset = new PwdReset();
         pwdReset.setUid(uid);
         pwdReset.setUserId(userDetails.getUserId());
@@ -170,7 +171,8 @@ public class ApiServiceImpl implements ApiService {
         User userDetails = (User) userDetailsServiceImpl.loadUserByUsername(email);
         // 将密码重置相关信息存入数据库，发送密码重置邮件
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String uid = passwordEncoder.encode(userDetails.getUsername());
+        // String uid = passwordEncoder.encode(userDetails.getUsername());
+        String uid = codeUtil.generateCode(10);
         PwdReset pwdResetObj = new PwdReset();
         pwdResetObj.setUid(uid);
         pwdResetObj.setUserId(userDetails.getUserId());

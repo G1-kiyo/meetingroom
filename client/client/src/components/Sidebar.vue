@@ -144,8 +144,8 @@ export default {
       width: 66px;
       height: 66px;
       & > img {
-        max-width: 66px;
-        max-height: 66px;
+        width: 66px;
+        height: 66px;
         border-radius: 50%;
       }
     }

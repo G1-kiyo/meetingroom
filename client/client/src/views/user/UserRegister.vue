@@ -244,7 +244,7 @@ export default {
             this.$api
               .userRegister({
                 data: {
-                  nickname: this.form.nickname,
+                  username: this.form.nickname,
                   truename: this.form.truename,
                   password: this.form.password,
                   phone: this.form.phone,
