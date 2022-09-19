@@ -1,0 +1,174 @@
+@import "@/assets/css/var.less";
+@import "@/assets/css/global.less";
+
+
+.meetingroom {
+    background-color: @color_bg_green;
+    display: grid;
+    grid-template-columns: 250px auto;
+    grid-template-rows: 100%;
+    // grid-template-rows: var(--grid-template-rows);
+    // 按引号来分行
+    grid-template-areas: "sidebar infoshow";
+    // 侧边栏
+    &_sidebar {
+        &--outer {
+            grid-area: sidebar;
+        }
+
+        &--inner {
+            
+            height:450px;
+            margin: 50px 0 0 27px;
+            padding: 45px 17px 17px 25px;
+            background-color: #64CB53;
+            border: none;
+            border-radius: 3px;
+            color: @color_white;
+            font-size: 14px;
+        }
+
+        // 基本信息栏
+        &_basicinfo {
+            display:flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items:center;
+            &>div:first-child {
+                display: inline-block;
+                border-radius: 50%;
+                width: 66px;
+                height: 66px;
+                &>img{
+                    max-width:66px;
+                    max-height: 66px;
+                    border-radius:50%;
+                }
+            }
+
+            &>div:nth-child(2) {
+                
+                display:inline-block;
+                margin-left: 15px;
+                &>span{
+                    line-height:20px;
+                }
+            }
+        }
+
+        // 导航栏+其他操作栏
+        &_nav,
+        &_ope{
+            margin-left:0;
+            padding:0;
+
+            &>li {
+                border: none;
+                height: 45px;
+                margin: none;
+                text-align: left;
+                padding: none;
+                list-style:none;
+                
+                &>span {
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        &_ope {
+            margin-top: 10px;
+        }
+    }
+
+    // 主要信息展示
+    &_infoshow {
+        grid-area:infoshow;
+        padding-left:20px;
+        margin-top: 50px;
+        // 检索结果展示
+        &_search {
+            display:grid;
+            grid-template-rows: 50px 60%;
+            grid-template-areas: "nav""result";
+            // 面包屑
+            &.nav {
+                grid-area: nav;
+            }
+
+            // 检索结果
+            &.result {
+                grid-area: result;
+                display: grid;
+                grid-template-columns: repeat(4,200px);
+                grid-gap: 10px;
+                margin-top: 10px;
+            }
+        }
+
+        // 正常信息展示
+        &_main {
+            display:grid;
+            grid-template-rows: 50px 150px 60%;
+            grid-template-columns: auto;
+            grid-template-areas:"mybook""operation""room";
+            // 个人预约相关跳转按钮
+            &.mybook--outer {
+                grid-area: mybook;
+            }
+
+            &.mybook--inner {
+                position: absolute;
+                .mixin_btn(107px, 29px, @color_bold_green, @color_white, none, 3px);
+                line-height:29px;
+                right: 20px;
+            }
+
+            // 操作框
+            &.operation {
+                grid-area: operation;
+                border-radius:5px;
+                background-color: @color_white;
+                padding:15px;
+                margin-right:15px;
+                .operation_timegroup{
+                    display:flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    
+                }
+                
+                .timegroup_time{
+                    display:flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    margin-left:10px;
+                    &_starttime{
+                        margin-right:10px;
+                    }
+                }
+                .operation_other{
+                    display:flex;
+                    height:30px;
+                    margin-top:20px;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    .other_search,.other_sort{
+                        
+                        margin-right:10px;
+                    }
+                    
+                }
+            }
+            // 会议室信息
+            &.roomrelated {
+                grid-area: room;
+                display: grid;
+                grid-template-columns: repeat(4,200px);
+                grid-gap: 10px;
+                margin-top: 10px;
+            }
+
+        }
+    }
+}

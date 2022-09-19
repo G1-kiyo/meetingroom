@@ -51,7 +51,6 @@ public class UserController {
     @RequestMapping(value = "/job_info")
     // @Param只能接收使用get方法的请求
     public String requestJobInfo(@Param("userId") String userId) {
-
         Map<String, User> result = userDetailsServiceImpl.loadUserByUserId(userId);
         return new JsonResult<Map<String, User>>(Code.REQUEST_SUCCESS, result).toJSON();
     }

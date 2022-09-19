@@ -38,8 +38,6 @@ class Api{
     submitPwdResetForm(requestData){
         return AxiosHttp.post('/api/reset_pwd',requestData,true);
     }
-    
-
 
     // 请求用户工作信息
     requestUserJobInfo(requestData){
@@ -80,6 +78,11 @@ class Api{
     // 提交会议预约信息
     uploadRoomBookInfo(requestData){
         return AxiosHttp.post('/meeting_room/book_info',requestData,true);
+    }
+
+    // 请求线上会议信息
+    requestUpcomingOnlineMeeting(requestData){
+        return AxiosHttp.get('/online_meeting/upcoming',requestData,false)
     }
 }
 export default new Api();

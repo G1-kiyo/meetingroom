@@ -44,12 +44,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             token = jwtBean.parseJwt(request);
 
             if (token != null && jwtBean.validateJwt(token)) {
-                String userId = jwtBean.getUsernameFromToken(token);
-                User userDetails = userMapper.findUserByUserId(userId);
-                System.out.println(userDetails.getEmail());
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails.getUsername(), userDetails.getPassword());
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+                // String userId = jwtBean.getUsernameFromToken(token);
+                // User userDetails = userMapper.findUserByUserId(userId);
+                // System.out.println(userDetails.getEmail());
+                // UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                //         userDetails.getUsername(), userDetails.getPassword());
+                // SecurityContextHolder.getContext().setAuthentication(authToken);
+                
             }
         } catch (JwtNotFoundException e) {
             // 如果用户尚处于登陆阶段，并未携带token，在经过这一filter时

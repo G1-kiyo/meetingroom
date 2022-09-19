@@ -4,7 +4,10 @@ import PasswordReset from "./views/user/PasswordReset.vue"
 import RequestPasswordReset from "./views/user/RequestPasswordReset.vue"
 import UserRegister from "./views/user/UserRegister.vue"
 import UserProfile from "./views/user/UserProfile.vue"
-import OnlineMeetingSchedule from "./views/meeting/online/OnlineMeetingSchedule.vue"
+import OnlineConversationChoice from "./views/meeting/online/OnlineConversationChoice.vue"
+import OnlineVideoPattern from "./views/meeting/online/OnlineVideoPattern.vue"
+import OnlineScheduleDetail from "./views/meeting/online/OnlineScheduleDetail.vue"
+import OnlineGroupQuery from "./views/meeting/online/OnlineGroupQuery.vue"
 import RoomInfoQuery from "./views/meeting/offline/RoomInfoQuery.vue"
 import RoomDayDetail from "./views/meeting/offline/RoomDayDetail.vue"
 import RoomMonDetail from "./views/meeting/offline/RoomMonDetail.vue"
@@ -27,7 +30,10 @@ const routes = [
     {name:"user_profile",path:"/user/user_profile",component:UserProfile,meta:{requireAuth:true}},
     {name:"my_room_check",path:"/user/profile/my_room_check",component:MyRoomCheck,meta:{requireAuth:true}},
     {name:"room_check_detail",path:"/user/profile/room_check_detail/:meetingId",component:RoomCheckDetail,props:true,meta:{requireAuth:true}},
-    {name:"online_meeting_schedule",path:"/meeting/online/online_meeting_schedule",component:OnlineMeetingSchedule,meta:{requireAuth:true}},
+    {name:"online_conversation_choice",path:"/meeting/online/conversation_choice",component:OnlineConversationChoice,meta:{requireAuth:true}},
+    {name:"online_video_pattern",path:"/meeting/online/video_pattern",component:OnlineVideoPattern,meta:{requireAuth:true}},
+    {name:"online_schedule_detail",path:"/meeting/online/schedule_detail",component:OnlineScheduleDetail,meta:{requireAuth:true}},
+    {name:"online_group_query",path:"/meeting/online/group_query",component:OnlineGroupQuery,meta:{requireAuth:true}},
     {name:"room_info_query",path:"/meeting/offline/room_info_query",component:RoomInfoQuery,meta:{requireAuth:true}},
     {name:"room_day_detail",path:"/meeting/offline/room_day_detail",component:RoomDayDetail,meta:{requireAuth:true}},
     {name:"room_mon_detail",path:"/meeting/offline/room_mon_detail",component:RoomMonDetail,meta:{requireAuth:true}},

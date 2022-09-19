@@ -16,6 +16,7 @@ import com.format_project.meeting.model.entity.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 public class LoginSuccessHandler implements AuthenticationSuccessHandler  {
@@ -30,6 +31,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler  {
         // response.sendRedirect("/user/index");
         Map<String,String> authInfo = new HashMap<String,String>();
         User userDetails = (User) authentication.getPrincipal();
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        System.out.println("this is"+SecurityContextHolder.getContext().getAuthentication());
         // 还需要将token值传回给客户端
         authInfo.put("token",jwtBean.generateJwt(authentication));
         authInfo.put("userId",userDetails.getUserId());

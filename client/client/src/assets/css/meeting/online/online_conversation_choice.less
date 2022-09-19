@@ -1,0 +1,167 @@
+@import "@/assets/css/var.less";
+@import "@/assets/css/global.less";
+
+.conversation_choice {
+    // 容器
+    background-color: @color_bg_green;
+
+    .online_nav {
+        position: fixed;
+        float: left;
+        margin-left:5px
+    }
+
+    .container {
+        padding-left: 147px;
+        display: grid;
+        grid-template-columns: 60% 40%;
+        grid-template-rows: 100vh;
+        grid-template-areas: "choice schedule";
+
+        // 选择栏
+        .choice {
+            &--outer {
+                grid-area: choice;
+            }
+
+            display:grid;
+            grid-template-columns:repeat(2, 120px);
+            grid-template-rows:repeat(2, 139px);
+            grid-row-gap:15px;
+            grid-column-gap:50px;
+
+            &_video,
+            &_join,
+            &_voice,
+            &_text {
+
+                // 方块
+                &>div {
+                    padding: 35px;
+                    width: 100%;
+                    height: 120px;
+                    border-radius: 10px;
+                }
+
+                // 文字
+                &>span {
+                    display: block;
+                    text-align: center;
+                }
+            }
+        }
+
+        .meeting_schedule {
+            &--outer {
+                grid-area: schedule;
+            }
+
+            position:relative;
+            margin-left:44px;
+            width:298px;
+            height:384px;
+            border-radius:5px;
+
+            .schedule {
+
+                // 时间显示
+                &_time {
+                    width: 100%;
+                    height: 113px;
+                    background-color: #00008B;
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &>span:first-child {
+                        font-size: 32px;
+                        line-height: 40px;
+                        display: block;
+                        font-weight: bold;
+                    }
+                }
+
+                // 预约列表
+                &_list {
+                    width: 100%;
+                    height: calc(100% - 151px);
+                    margin: 0px;
+                    padding: 0px;
+                    list-style-type: none;
+
+                    // 单项预约记录
+                    &_item {
+                        padding: 15px 12px;
+                        border-style: none none solid none;
+                        border-color: #CCCCCC;
+
+                        // 标题+操作栏
+                        &>div:first-child {
+                            &>span {
+                                font-size: 22px;
+                                font-weight: bold
+                            }
+
+                            // 按钮组
+                            &>div {
+                                float: right;
+
+                                .button {
+                                    height: 30px;
+                                    border-radius: 3px;
+
+                                    // 开始按钮
+                                    &.start {
+                                        background-color: #1821D7;
+                                        border: none;
+                                        color: white;
+                                    }
+                                }
+                            }
+
+                        }
+
+                        // 辅助标签
+                        &>div:nth-child(2) {
+                            &>span {
+                                font-weight: bold;
+                                border-radius: 3px;
+                                color: white;
+                            }
+
+                            &>span:first-child {
+                                background-color: #228B22;
+
+                            }
+
+                            &>span:nth-child(2) {
+                                background-color: #666DC9;
+                                margin-left: 10px;
+                            }
+                        }
+
+                        .timeperiod,
+                        .meetingid {
+                            margin-top: 12px;
+                        }
+                    }
+                }
+
+                // 详细记录跳转
+                &_upcomingInfo {
+                    width: 100%;
+                    height: 38px;
+                    background-color: #EDECEC;
+                    position: absolute;
+                    bottom: 0;
+                    border-radius: 5px;
+                    border: none;
+                    text-align: left;
+                    padding-left: 12px;
+                    line-height: 38px;
+                }
+            }
+        }
+    }
+}
