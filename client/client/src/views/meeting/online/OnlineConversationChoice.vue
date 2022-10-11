@@ -111,6 +111,7 @@
                 <span>{{ item.meetingType }}</span>
                 <span>{{ item.isInvited ? "invited" : "launch" }}</span>
               </div>
+
               <!-- 会议预约时间段 -->
               <span class="timeperiod">{{
                 `${checkTimePeriod(new Date(item.scheduleStartTime))} - ${checkTimePeriod(

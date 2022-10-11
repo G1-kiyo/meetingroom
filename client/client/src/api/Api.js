@@ -82,7 +82,12 @@ class Api{
 
     // 请求线上会议信息
     requestUpcomingOnlineMeeting(requestData){
-        return AxiosHttp.get('/online_meeting/upcoming',requestData,false)
+        return AxiosHttp.get('/online_meeting/upcoming',requestData,false);
+    }
+
+    // 请求发送邀请邮件
+    requestInvitationWithEmail(requestData){
+        return AxiosHttp.post('/online_meeting/invite',requestData,false);
     }
 }
 export default new Api();

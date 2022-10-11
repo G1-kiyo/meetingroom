@@ -10,6 +10,7 @@ import api from "./api/Api.js";
 import elFormValidator from './utils/ElFormValidator';
 import dateProcess from "./utils/DateProcess";
 import UserOperationControl from './utils/UserOperationControl';
+import './utils/PxToRem';
 import Vue3Storage from "vue3-storage";
 import "element-plus/dist/index.css";
 import "./assets/css/style.less";
@@ -59,3 +60,4 @@ app.use(router);
 app.use(store);
 // 挂在在根元素上
 app.mount("#app");
+
