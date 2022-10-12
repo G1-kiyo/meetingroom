@@ -84,7 +84,6 @@ import SelectedMemberItem from "./member/SelectedMemberItem.vue";
 import MemberGroupByDepartment from "./member/MemberGroupByDepartment.vue";
 export default {
   name: "MemberInfo",
-  props: ["allMemberInfo", "infoGroupByDepartment"],
   emits: ["handleMemberClosed"],
   components: {
     "search-member-item": SearchMemberItem,
@@ -96,10 +95,15 @@ export default {
     return {
       memberNameInput: "",
       searchResult: [],
+      allMemberInfo: [],
+      infoGroupByDepartment: {},
       searchResultShow: false,
       selectedMembers: store.state.selectedMember,
       batchSelection: false,
     };
+  },
+  created() {
+    this.showMember();
   },
 
   methods: {
@@ -134,6 +138,28 @@ export default {
           this.searchResult.push(item);
         }
       }
+    },
+    showMember: function () {
+      this.$api.requestAllMember({}).then((res) => {
+        this.allMemberInfo = res.data.allMemberInfo;
+        // console.log(this.allMemberInfo);
+        this.allMemberInfoProcess(this.allMemberInfo);
+      });
+    },
+    //按部门分类所有成员
+    allMemberInfoProcess: function (allMemberInfo) {
+      this.infoGroupByDepartment = {};
+      for (var item of allMemberInfo) {
+        if (item.department in this.infoGroupByDepartment) {
+          item["selected"] = false;
+          this.infoGroupByDepartment[item.department].push(item);
+        } else {
+          this.infoGroupByDepartment[item.department] = [];
+          item["selected"] = false;
+          this.infoGroupByDepartment[item.department].push(item);
+        }
+      }
+      // this.infoGroupByDepartment = newMap;
     },
   },
 };

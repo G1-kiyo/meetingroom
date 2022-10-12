@@ -29,9 +29,32 @@
           <button class="copy-id" @click="copyToClipBoard(curMt.meetingId)">
             Copy Meeting ID
           </button>
-          <button class="send-email" @click="sendInvitationEmail">Email</button>
+          <button class="send-email" @click="showEmailInput">Email</button>
         </div>
+        <el-input
+          class="send-email-input"
+          v-if="emailInputShow"
+          v-model="receiverEmail"
+          placeholder="Click button to select receivers"
+          ><template #append>
+            <div class="operation">
+              <button
+                class="operation-select"
+                type="button"
+                @click="selectMemberShow = true"
+              >
+                <i class="iconfont icon-icon-choose"></i>
+              </button>
+              <button class="operation-send" type="button" @click="sendInvitationEmail">
+                <i class="iconfont icon-fasong"></i>
+              </button>
+            </div> </template
+        ></el-input>
       </div>
+      <member-info
+        v-show="selectMemberShow"
+        @handleMemberClosed="selectMemberShow = false"
+      ></member-info>
       <section class="s-mtlist">
         <div class="head">
           <el-tooltip
@@ -110,15 +133,22 @@
 
 <script>
 import store from "@/store.js";
-import clipboard from "@utils/Clipboard.js";
+import clipboard from "@/utils/Clipboard.js";
+import MemberInfo from "@/components/MemberInfo";
 export default {
   name: "OnlineScheduleDetail",
-  components: {},
+  components: {
+    "member-info":MemberInfo
+  },
   data() {
     return {
       upcomingOnlineMeeting: {},
       interval: null,
       invitationShow: false,
+      emailInputShow:false,
+      selectMemberShow:false,
+      receiverEmail:"",
+      selectedMembers:[]
     };
   },
   computed: {
@@ -200,6 +230,7 @@ export default {
     },
     hideInvitation: function () {
       this.invitationShow = false;
+      this.emailInputShow = false;
     },
     copyToClipBoard: function (text, e) {
       if (navigator.clipboard) {
@@ -215,6 +246,9 @@ export default {
         let selector = e.currentTarget.className;
         clipboard(selector, text);
       }
+    },
+    showEmailInput:function(){
+      this.emailInputShow = true;
     },
     sendInvitationEmail: function () {
       let formData = new FormData();

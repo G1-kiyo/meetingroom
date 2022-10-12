@@ -71,11 +71,7 @@
     </div>
     <!-- 添加成员 -->
     <div v-if="memberShow">
-      <memberinfo
-        :allMemberInfo="allMemberInfo"
-        :infoGroupByDepartment="infoGroupByDepartment"
-        @handleMemberClosed="memberShow = false"
-      ></memberinfo>
+      <memberinfo @handleMemberClosed="memberShow = false"></memberinfo>
     </div>
   </div>
 </template>
@@ -250,26 +246,6 @@ export default {
     },
     showMember: function () {
       this.memberShow = true;
-      this.$api.requestAllMember({}).then((res) => {
-        this.allMemberInfo = res.data.allMemberInfo;
-        // console.log(this.allMemberInfo);
-        this.allMemberInfoProcess(this.allMemberInfo);
-      });
-    },
-    //按部门分类所有成员
-    allMemberInfoProcess: function (allMemberInfo) {
-      this.infoGroupByDepartment = {};
-      for (var item of allMemberInfo) {
-        if (item.department in this.infoGroupByDepartment) {
-          item["selected"] = false;
-          this.infoGroupByDepartment[item.department].push(item);
-        } else {
-          this.infoGroupByDepartment[item.department] = [];
-          item["selected"] = false;
-          this.infoGroupByDepartment[item.department].push(item);
-        }
-      }
-      // this.infoGroupByDepartment = newMap;
     },
     // 规范后台传输的会议信息
     dayMeetingInfoProcess: function (val) {
