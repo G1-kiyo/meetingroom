@@ -1,5 +1,6 @@
 package com.format_project.meeting.model.vo;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -8,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class InvitationEmail {
     private String sender;
-    private String receiver;
+    private String[] receiver;
     private String meetingTitle;
     @JsonFormat(pattern="yyyy-MM-dd")
     @DateTimeFormat(pattern="yyyy-MM-dd")
@@ -18,11 +19,11 @@ public class InvitationEmail {
     private String meetingLink;
     private String meetingId;
 
-    public String getReceiver() {
+    public String[] getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(String receiver) {
+    public void setReceiver(String[] receiver) {
         this.receiver = receiver;
     }
 

@@ -163,12 +163,7 @@
         </div>
       </section>
     </div>
-    <memberinfo
-      v-if="memberShow"
-      :allMemberInfo="allMemberInfo"
-      :infoGroupByDepartment="infoGroupByDepartment"
-      @handleMemberClosed="handleMemberClosed"
-    ></memberinfo>
+    <memberinfo v-if="memberShow" @handleMemberClosed="handleMemberClosed"></memberinfo>
   </div>
 </template>
 <script>
@@ -323,27 +318,23 @@ export default {
       });
     },
     //按部门分类所有成员
-    allMemberInfoProcess: function (allMemberInfo) {
-      this.infoGroupByDepartment = {};
-      for (var item of allMemberInfo) {
-        if (item.department in this.infoGroupByDepartment) {
-          item["selected"] = false;
-          this.infoGroupByDepartment[item.department].push(item);
-        } else {
-          this.infoGroupByDepartment[item.department] = [];
-          item["selected"] = false;
-          this.infoGroupByDepartment[item.department].push(item);
-        }
-      }
-      // this.infoGroupByDepartment = newMap;
-    },
+    // allMemberInfoProcess: function (allMemberInfo) {
+    //   this.infoGroupByDepartment = {};
+    //   for (var item of allMemberInfo) {
+    //     if (item.department in this.infoGroupByDepartment) {
+    //       item["selected"] = false;
+    //       this.infoGroupByDepartment[item.department].push(item);
+    //     } else {
+    //       this.infoGroupByDepartment[item.department] = [];
+    //       item["selected"] = false;
+    //       this.infoGroupByDepartment[item.department].push(item);
+    //     }
+    //   }
+    //   // this.infoGroupByDepartment = newMap;
+    // },
     selectMember: function () {
       if (this.meetingInfoEditable == true) {
-        this.$api.requestAllMember({}).then((res) => {
-          this.allMemberInfo = res.data.allMemberInfo;
-          this.allMemberInfoProcess(this.allMemberInfo);
-          this.memberShow = true;
-        });
+        this.memberShow = true;
       } else {
         ElMessage({
           type: "warning",

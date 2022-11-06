@@ -77,21 +77,24 @@ public class OnlineMeetingServiceImpl implements OnlineMeetingService {
 
         return result;
     }
+
     @Override
-    public void requestInvitationWithEmail(InvitationEmail invitationEmail){
+    public void requestInvitationWithEmail(InvitationEmail invitationEmail) {
         User sender = userMapper.findUserByUserId(invitationEmail.getSender());
-        User receiver = userMapper.findUserByUserId(invitationEmail.getReceiver());
+        String[] receiverEmail = invitationEmail.getReceiver();
+        // User receiver = userMapper.findUserByUserId(invitationEmail.getReceiver());
         Context context = new Context();
-        Map<String,Object> variables = new HashMap<String,Object>();
-        variables.put("sender",sender.getTruename());
-        variables.put("meetingTitle",invitationEmail.getMeetingTitle());
-        variables.put("meetingDate",invitationEmail.getMeetingDate());
-        variables.put("scheduledStartTime",invitationEmail.getStartTime());
-        variables.put("scheduledEndTime",invitationEmail.getEndTime());
-        variables.put("meetingId",invitationEmail.getMeetingId());
+        Map<String, Object> variables = new HashMap<String, Object>();
+        variables.put("sender", sender.getTruename());
+        variables.put("meetingTitle", invitationEmail.getMeetingTitle());
+        variables.put("meetingDate", invitationEmail.getMeetingDate());
+        variables.put("scheduledStartTime", invitationEmail.getStartTime());
+        variables.put("scheduledEndTime", invitationEmail.getEndTime());
+        variables.put("meetingId", invitationEmail.getMeetingId());
         context.setVariables(variables);
         String content = templateEngine.process("/invitation_email", context);
-        emailSenderUtil.sendMail(receiver.getEmail(), "Meeting Invitation", content);
+        emailSenderUtil.sendMultipleMails(receiverEmail, "Meeting Invitation", content);
+
     }
 
 }

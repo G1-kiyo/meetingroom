@@ -8,6 +8,7 @@ const store = createStore({
         selectedMember:[]
       }
     },
+    getters:{},
     mutations:{
       setToken(state,payload){
     

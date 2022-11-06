@@ -39,6 +39,7 @@ app.config.globalProperties.$elFormValidator = elFormValidator;
 app.config.globalProperties.$dateProcess = dateProcess;
 app.config.globalProperties.$userOC = UserOperationControl;
 
+app.provide('$api',api);
 //全局注册elementplus
 app.use(ElementPlus);
 // 全局注册element plus图标

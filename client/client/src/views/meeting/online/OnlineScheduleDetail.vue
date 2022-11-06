@@ -2,34 +2,36 @@
   <div class="schedule">
     <main>
       <div class="invitation" v-show="invitationShow">
-        <el-icon @click="hideInvitation"><CloseBold /></el-icon>
+        <el-icon class="close" @click="hideInvitation" size="15"><CloseBold /></el-icon>
         <div>
-          <i class="iconfont icon-zhucetianjiahaoyou">Invite People</i>
+          <i class="iconfont icon-zhucetianjiahaoyou"></i>
+          <span class="ind-tit">Invite People</span>
         </div>
-        <div>
+        <div class="ind-con">
           <p>
-            Share the link<span
+            Share the link<span class="ind-emp"
               >https://online_meeting/invitation/{{ curMt.meetingId }}</span
             >
           </p>
           <p>or</p>
           <p>
-            Share the Meeting ID <span>{{ curMt.meetingId }}</span> directly
+            Share the Meeting ID
+            <span class="ind-emp">{{ curMt.meetingId }}</span> directly
           </p>
         </div>
         <div class="btn-group">
           <button
-            class="copy-link"
+            class="btn copy-link"
             @click="
               copyToClipBoard(`https://online_meeting/invitation/${curMt.meetingId}`)
             "
           >
             Copy Link
           </button>
-          <button class="copy-id" @click="copyToClipBoard(curMt.meetingId)">
+          <button class="btn copy-id" @click="copyToClipBoard(curMt.meetingId)">
             Copy Meeting ID
           </button>
-          <button class="send-email" @click="showEmailInput">Email</button>
+          <button class="btn send-email" @click="showEmailInput">Email</button>
         </div>
         <el-input
           class="send-email-input"
@@ -39,13 +41,17 @@
           ><template #append>
             <div class="operation">
               <button
-                class="operation-select"
+                class="in-btn operation-select"
                 type="button"
                 @click="selectMemberShow = true"
               >
                 <i class="iconfont icon-icon-choose"></i>
               </button>
-              <button class="operation-send" type="button" @click="sendInvitationEmail">
+              <button
+                class="in-btn operation-send"
+                type="button"
+                @click="sendInvitationEmail"
+              >
                 <i class="iconfont icon-fasong"></i>
               </button>
             </div> </template
@@ -53,7 +59,7 @@
       </div>
       <member-info
         v-show="selectMemberShow"
-        @handleMemberClosed="selectMemberShow = false"
+        @handleMemberClosed="confirmSelectedMember"
       ></member-info>
       <section class="s-mtlist">
         <div class="head">
@@ -63,7 +69,9 @@
             content="Refresh"
             placement="left-start"
           >
-            <el-icon @click="requestUpcomingOnlineMeeting"><RefreshRight /></el-icon>
+            <el-icon class="h-refresh" @click="requestUpcomingOnlineMeeting" size="20"
+              ><RefreshRight
+            /></el-icon>
           </el-tooltip>
 
           <div class="h-title">Upcoming</div>
@@ -73,7 +81,9 @@
             content="Start a new meeting"
             placement="right-start"
           >
-            <el-icon @click="routeToGroupQuery"><CirclePlus /></el-icon>
+            <el-icon class="h-invite" @click="routeToGroupQuery" size="24"
+              ><CirclePlus
+            /></el-icon>
           </el-tooltip>
         </div>
         <div class="personalId">
@@ -81,7 +91,7 @@
           <span>My Personal Meeting ID</span>
         </div>
         <div class="mtlist-con">
-          <span>Today</span>
+          <span class="mtlist-tit">Today</span>
           <ul>
             <li
               v-for="(item, index) in upcomingOnlineMeeting"
@@ -93,37 +103,37 @@
                 class="mtlist-con-box"
                 :class="{ '--active': item.meetingId == curMt.meetingId }"
               >
-                <span>{{ item.topic }}</span>
-                <span class="timeperiod">{{
+                <span class="txt topic">{{ item.topic }}</span>
+                <span class="txt timeperiod">{{
                   `${checkTimePeriod(
                     new Date(item.scheduleStartTime)
                   )} - ${checkTimePeriod(new Date(item.scheduleEndTime))}`
                 }}</span>
-                <span class="meetingid">Meeting Id: {{ item.meetingId }}</span>
+                <span class="txt meetingid">Meeting Id: {{ item.meetingId }}</span>
               </div>
             </li>
           </ul>
         </div>
       </section>
-      <el-divider direction="vertical" />
+      <el-divider direction="vertical" class="m-divider" />
       <section class="s-mtinvite">
         <div>
-          <span>{{ curMt.topic }}</span>
-          <div>
-            <span class="timeperiod">{{
+          <span class="txt topic">{{ curMt.topic }}</span>
+          <div class="i-time">
+            <span class="period">{{
               `${checkTimePeriod(new Date(curMt.scheduleStartTime))} - ${checkTimePeriod(
                 new Date(curMt.scheduleEndTime)
               )}`
             }}</span>
             <el-divider direction="vertical" />
-            <span>{{
+            <span class="willst">{{
               triggerWillStartOutput(curMt.meetingDate, curMt.schedulStartTime)
             }}</span>
           </div>
-          <span class="meetingid">Meeting Id: {{ curMt.meetingId }}</span>
+          <span class="txt meetingid">Meeting Id: {{ curMt.meetingId }}</span>
           <div class="btn-group">
-            <button class="start">Start</button>
-            <button class="invite" @click="showInvitation">Invite</button>
+            <button class="btn start">Start</button>
+            <button class="btn invite" @click="showInvitation">Invite</button>
           </div>
         </div>
       </section>
@@ -138,17 +148,16 @@ import MemberInfo from "@/components/MemberInfo";
 export default {
   name: "OnlineScheduleDetail",
   components: {
-    "member-info":MemberInfo
+    "member-info": MemberInfo,
   },
   data() {
     return {
       upcomingOnlineMeeting: {},
       interval: null,
       invitationShow: false,
-      emailInputShow:false,
-      selectMemberShow:false,
-      receiverEmail:"",
-      selectedMembers:[]
+      emailInputShow: false,
+      selectMemberShow: false,
+      receiverEmail: "",
     };
   },
   computed: {
@@ -247,17 +256,38 @@ export default {
         clipboard(selector, text);
       }
     },
-    showEmailInput:function(){
+    showEmailInput: function () {
       this.emailInputShow = true;
     },
     sendInvitationEmail: function () {
-      let formData = new FormData();
+      // let formData = new FormData();
       this.$api.requestInvitationWithEmail({
         data: {
           sender: store.state.userId,
-          receiver:
+          receiver: store.state.selectedMember,
+          meetingTitle: this.curMt.meetingTitle,
+          meetingDate: this.curMt.meetingDate,
+          startTime: this.curMt.scheduledSTartTime,
+          endTime: this.curMt.scheduledEndTime,
+          meetingLink: `https://online_meeting/invitation/${this.curMt.meetingId}`,
+          meetingId: this.curMt.meetingId,
         },
       });
+    },
+    confirmSelectedMember: function () {
+      this.selectMemberShow = false;
+      var receiverEmailStr = "";
+      var selectedMember = store.state.selectedMember;
+      var index = 0;
+      for (let email of selectedMember) {
+        index += 1;
+        if (index == selectedMember.length) {
+          receiverEmailStr += email;
+        } else {
+          receiverEmailStr += email + ";";
+        }
+      }
+      this.receiverEmail = receiverEmailStr;
     },
   },
 };
