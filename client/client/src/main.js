@@ -1,11 +1,11 @@
-import { createApp} from 'vue';
+import { createApp,provide} from 'vue';
 import store from "./store";
 import App from './App.vue';
 import ElementPlus from "element-plus";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import router from "./router.js"
+import router from "./router/router.js"
 import api from "./api/Api.js";
 import elFormValidator from './utils/ElFormValidator';
 import dateProcess from "./utils/DateProcess";
@@ -38,6 +38,10 @@ app.config.globalProperties.$elFormValidator = elFormValidator;
 app.config.globalProperties.$dateProcess = dateProcess;
 app.config.globalProperties.$userOC = UserOperationControl;
 
+provide("$api",api);
+provide("$elFormValidator",elFormValidator);
+provide("$dateProces",dateProcess);
+provide("$userOC",UserOperationControl);
 //全局注册elementplus
 app.use(ElementPlus);
 // 全局注册element plus图标

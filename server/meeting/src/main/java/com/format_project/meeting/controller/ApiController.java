@@ -2,6 +2,7 @@ package com.format_project.meeting.controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import com.format_project.meeting.bean.Code.CodeUtil;
 import com.format_project.meeting.mapper.PwdResetMapper;
 import com.format_project.meeting.mapper.UserMapper;
 import com.format_project.meeting.model.dto.AuthInfo;
+import com.format_project.meeting.model.vo.Router;
 import com.format_project.meeting.service.impl.ApiServiceImpl;
 import com.format_project.meeting.service.impl.UserDetailsServiceImpl;
 
@@ -132,5 +134,12 @@ public class ApiController {
         return new JsonResult<>(Code.PASSWORD_RESET_SUCCESS).toJSON();
 
     }
+
+    @RequestMapping(value="/router")
+    public String dynamicRouter(){
+        ArrayList<Router>routes = apiServiceImpl.loadDynamicRouter();
+        return new JsonResult<ArrayList<Router>>(Code.REQUEST_SUCCESS,routes).toJSON();
+    }
+    
 
 }

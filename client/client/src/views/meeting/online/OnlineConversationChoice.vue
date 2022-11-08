@@ -1,13 +1,14 @@
 <template>
   <div class="conversation_choice">
     <!--可以设置mode、默认index、跳转路由，特定栏目执行其他功能  -->
-    <navigator mode="horizontal" default-index="2">
+    <navigator ref="globalNav" class="global_nav" mode="horizontal" defaultIndex="2">
       <!--vue2的slot插槽属性为slot和slot-scope;vue3的slot插槽改为v-slot:插槽名=来自子组件的props数据  -->
       <template v-slot:navigator-item="{ currentIndex }">
         <navigator-item
-          v-for="(item, index) in fixedNavInfo"
+          v-for="(item, key, index) in globalNavInfo"
           :key="item.label"
           :path="item.path"
+          :index="index"
           :class="{ '--active': index == currentIndex }"
         >
           <!--插槽与v-if搭配不生效  -->
@@ -22,17 +23,20 @@
         </navigator-item>
       </template>
     </navigator>
-    <navigator class="online_nav" mode="vertical" default-index="0">
+    <navigator class="online_nav" mode="vertical" defaultIndex="0">
       <template v-slot:navigator-item="{ currentIndex }"
         ><navigator-item
-          v-for="(item, index) in onlineNavInfo"
+          v-for="(item, key, index) in onlineNavInfo"
           :key="item.label"
           :path="item.path"
+          :index="index"
           :func="item.func"
           :class="{ '--active': index == currentIndex }"
         >
           <template v-slot:navigator-item-img>
-            <div><i :class="item.iconfont" :data-type="index <= 2 ? 1 : 2"></i></div>
+            <div class="test">
+              <i :class="item.iconfont" :data-type="index <= 2 ? 1 : 2"></i>
+            </div>
           </template>
           <template v-slot:navigator-item-text
             ><div class="text">{{ item.label }}</div>
@@ -44,16 +48,12 @@
     <main class="container">
       <!-- 选择栏 -->
       <div class="choice--outer">
-        <div
-          class="choice"
-          @mouseover="checkIsOver($event)"
-          @mouseout="checkIsLeaving($event)"
-        >
+        <div class="choice">
           <!--视频会议-->
           <router-link to="/meeting/online/video_pattern"
             ><div class="choice_video">
               <div>
-                <el-icon ref="video"><VideoCamera /></el-icon>
+                <el-icon ref="video" :size="50"><VideoCamera /></el-icon>
               </div>
               <span>Video Meeting</span>
             </div></router-link
@@ -61,21 +61,21 @@
           <!-- 参与会议 -->
           <div class="choice_join">
             <div>
-              <el-icon ref="join"><Plus /></el-icon>
+              <el-icon ref="join" :size="50"><Plus /></el-icon>
             </div>
             <span>Join Meeting</span>
           </div>
           <!-- 语音会议 -->
           <div class="choice_voice">
             <div>
-              <el-icon ref="voice"><Microphone /></el-icon>
+              <el-icon ref="voice" :size="50"><Microphone /></el-icon>
             </div>
             <span>Voice Chat</span>
           </div>
           <!-- 文字聊天 -->
           <div class="choice_text">
             <div>
-              <el-icon ref="text"><ChatDotRound /></el-icon>
+              <el-icon ref="text" :size="50"><ChatDotRound /></el-icon>
             </div>
             <span>Text Chat</span>
           </div>
@@ -131,7 +131,6 @@
 </template>
 
 <script>
-import OnlineNavigator from "@/components/OnlineNavigator.vue";
 import Navigator from "@/components/navigator/Navigator.vue";
 import NavigatorItem from "@/components/navigator/NavigatorItem.vue";
 import { ElMessage } from "element-plus";
@@ -139,12 +138,12 @@ import store from "@/store.js";
 export default {
   name: "OnlineConversationChoice",
   components: {
-    "online-navigator": OnlineNavigator,
+    "navigator-item": NavigatorItem,
     navigator: Navigator,
   },
   data() {
     return {
-      fixedNavInfo: {
+      globalNavInfo: {
         overview: {
           label: "Overview",
           hasIcon: false,
@@ -168,7 +167,7 @@ export default {
         file: {
           label: "File",
           hasIcon: false,
-          path: "/meeting/online/online_meeting_schedule",
+          // path: "/meeting/online/online_meeting_schedule",
         },
       },
       onlineNavInfo: {
@@ -271,18 +270,18 @@ export default {
         this.pastDate = this.datetime.date;
       }
     },
-    checkIsHover: function (e) {
-      if (e.event.currentTarget.className) {
-        var refName = e.event.currentTarget.className.split("_")[1];
-        this.$refs.refName.style.color = "#264DE8";
-      }
-    },
-    checkIsLeaving: function (e) {
-      if (e.event.currentTarget.className) {
-        var refName = e.event.currentTarget.className.split("_")[1];
-        this.$refs.refName.style.color = "#666666";
-      }
-    },
+    // checkIsHover: function (e) {
+    //   if (e.event.currentTarget.className) {
+    //     var refName = e.event.currentTarget.className.split("_")[1];
+    //     this.$refs.refName.style.color = "#264DE8";
+    //   }
+    // },
+    // checkIsLeaving: function (e) {
+    //   if (e.event.currentTarget.className) {
+    //     var refName = e.event.currentTarget.className.split("_")[1];
+    //     this.$refs.refName.style.color = "#666666";
+    //   }
+    // },
     checkTimePeriod: function (datetime) {
       var year = datetime.getFullYear();
       var month = datetime.getMonth();
@@ -317,6 +316,7 @@ export default {
         date: formatDate,
       };
     },
+
     requestUpcomingOnlineMeeting: function () {
       this.$api
         .requestUpcomingOnlineMeeting({
@@ -332,4 +332,31 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style scoped lang="less">
+.global_nav {
+  background-color: transparent;
+}
+.iconfont[data-type] {
+  &::before {
+    font-size: 44px;
+  }
+}
+.vertical {
+  .navigator_item.--active {
+    .iconfont[data-type="1"]::before {
+      color: #264de8;
+    }
+    .iconfont[data-type="2"]::before {
+      color: #ff0000;
+    }
+  }
+}
+.horizontal {
+  .navigator_item.--active {
+    & > .text {
+      color: #00008b;
+      font-weight: bold;
+    }
+  }
+}
+</style>

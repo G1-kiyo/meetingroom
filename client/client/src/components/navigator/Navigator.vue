@@ -14,18 +14,31 @@ export default {
   components: {
     "navigator-item": NavigatorItem,
   },
-  props: ["mode", "default-index"],
+  props: ["mode", "defaultIndex"],
   data() {
     return {
-      currentIndex: this["default-index"],
+      currentIndex: this.defaultIndex,
     };
   },
-  methods: {},
+  mounted() {
+    // console.log(this);
+    // this.$on("updateIndex", this.updateIndex);
+  },
+  methods: {
+    updateIndex: function (newIndex) {
+      this.currentIndex = newIndex;
+    },
+  },
 };
 </script>
 <style scoped lang="less">
 .navigator {
   border: none;
   background-color: white;
+  .horizontal {
+  }
+  .vertical {
+    width: 72px;
+  }
 }
 </style>

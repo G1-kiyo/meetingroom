@@ -22,11 +22,13 @@
             </el-icon>
           </div>
           <!-- day/month切换 -->
-          <day-month-switch
+          <custom-switch
             class="roomdetail_operation_switch"
-            :roomId="roomId"
-            :date="date"
-          ></day-month-switch>
+            defaultCheck="false"
+            defaultValue="DAY"
+            theOtherValue="MON"
+            @checkStateChange="changeToMonth"
+          ></custom-switch>
         </div>
         <el-divider></el-divider>
         <!-- 会议室预约展示 -->
@@ -84,11 +86,11 @@ import store from "@/store.js";
 import TimeLine from "../../../components/TimeLine";
 // import ReferrenceLine1 from "../../../components/ReferrenceLine1";
 import DateGroup from "@/components/DateGroup.vue";
-import DayMonthSwitch from "@/components/DayMonthSwitch.vue";
+import CustomSwitch from "@/components/CustomSwitch.vue";
 import ReferrenceLine from "@/components/ReferrenceLine.vue";
 import RoomBook from "../../../components/RoomBook";
 import MemberInfo from "../../../components/MemberInfo";
-import _ from "lodash";
+import debounce from "lodash/debounce";
 import Navigator from "@/components/Navigator.vue";
 // import UserOperationControl from "@/utils/UserOperationControl";
 export default {
@@ -102,7 +104,7 @@ export default {
     memberinfo: MemberInfo,
     navigator: Navigator,
     "date-group": DateGroup,
-    "day-month-switch": DayMonthSwitch,
+    "custom-switch": CustomSwitch,
   },
   created() {
     const userJobInfo = this.$api.requestUserJobInfo({
@@ -217,7 +219,7 @@ export default {
     // 如果await后的方法中直接return value，async function.then获取到的value就是上述语句return的value
     // 如果还要结合setTimeout，需要在await后的方法内return promise，然后利用resolve传值
     // async和await实际上是基于promise实现的，也是为了简化promise嵌套的then（链式调用）
-    requestRoomInfo: _.debounce(function (newVal) {
+    requestRoomInfo: debounce(function (newVal) {
       this.$api
         .requestDayMeetingInfo({
           params: {
@@ -290,6 +292,12 @@ export default {
           );
         }
       }
+    },
+    changeToMonth: function () {
+      this.$router.push({
+        path: "/meeting/offline/room_mon_detail",
+        query: { roomId: this.roomId, date: this.date },
+      });
     },
   },
 };

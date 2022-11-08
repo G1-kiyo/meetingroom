@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "348570",
+      "name": "history",
+      "font_class": "history",
+      "unicode": "eb1a",
+      "unicode_decimal": 60186
+    },
+    {
+      "icon_id": "1227856",
+      "name": "exit",
+      "font_class": "exit",
+      "unicode": "e69f",
+      "unicode_decimal": 59039
+    },
+    {
+      "icon_id": "4936656",
+      "name": "home-fill",
+      "font_class": "home-fill",
+      "unicode": "e867",
+      "unicode_decimal": 59495
+    },
+    {
+      "icon_id": "23237475",
+      "name": "实时录制-fill",
+      "font_class": "record-circle-fill",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "5651470",
+      "name": "群组",
+      "font_class": "qunzu",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
       "icon_id": "1876334",
       "name": "客户群组",
       "font_class": "kehuqunzu",

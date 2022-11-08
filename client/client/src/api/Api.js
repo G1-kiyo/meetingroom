@@ -1,6 +1,10 @@
 import AxiosHttp from "../utils/AxiosHttp.js";
 
 class Api{
+    // 加载动态路由
+    requestDynamicRoutes(requestData){
+        return AxiosHttp.get('/api/router',requestData,false);
+    }
     // 用户登录请求
     userLogin(requestData){
         return AxiosHttp.post('/user/login',requestData,true);
@@ -82,7 +86,15 @@ class Api{
 
     // 请求线上会议信息
     requestUpcomingOnlineMeeting(requestData){
-        return AxiosHttp.get('/online_meeting/upcoming',requestData,false)
+        return AxiosHttp.get('/online_meeting/upcoming',requestData,false);
+    }
+    // 请求预约线上会议
+    requestScheduleOnlineMeeting(requestData){
+        return AxiosHttp.post('/online_meeting/schedule',requestData,false);
+    }
+    // 请求线上即时会议唯一ID
+    requestPersonalMeetingId(requestData){
+        return AxiosHttp.get('/online_meeting/personal_info',requestData,false);
     }
 }
 export default new Api();

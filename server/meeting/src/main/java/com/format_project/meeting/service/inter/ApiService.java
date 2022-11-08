@@ -1,5 +1,6 @@
 package com.format_project.meeting.service.inter;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.format_project.meeting.model.dto.AuthInfo;
+import com.format_project.meeting.model.vo.Router;
 import com.github.mizosoft.methanol.MultipartBodyPublisher;
 
 public interface ApiService {
@@ -19,4 +21,5 @@ public interface ApiService {
     public void sendVerificationEmail(String to,String username,String uid);
     public Map<String, Boolean> validatePwdResetEmail(String uid);
     public void resetPassword(AuthInfo authInfo);
+    public ArrayList<Router> loadDynamicRouter();
 }

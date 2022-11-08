@@ -21,12 +21,13 @@
           </el-icon>
         </div>
         <!-- day/month切换 -->
-        <day-month-switch
-          class="mondetail_operation_switch"
-          :roomId="roomId"
-          :date="date"
+        <custom-switch
+          class="roomdetail_operation_switch"
           defaultCheck="true"
-        ></day-month-switch>
+          defaultValue="DAY"
+          theOtherValue="MON"
+          @checkStateChange="changeToDay"
+        ></custom-switch>
       </div>
       <!-- 日历 -->
       <table class="mondetail_main">
@@ -60,15 +61,15 @@
 <script>
 import Navigator from "@/components/Navigator.vue";
 import DateGroup from "@/components/DateGroup.vue";
-import DayMonthSwitch from "@/components/DayMonthSwitch.vue";
+import CustomSwitch from "@/components/CustomSwitch.vue";
 import CalendarItem from "@/components/CalendarItem.vue";
-import _ from "lodash";
+import debounce from "lodash/debounce";
 export default {
   name: "RoomMonDetail",
   components: {
     navigator: Navigator,
     "date-group": DateGroup,
-    "day-month-switch": DayMonthSwitch,
+    "custom-switch": CustomSwitch,
     "calendar-item": CalendarItem,
   },
   created() {
@@ -160,7 +161,7 @@ export default {
         nextMonthTotalDay: nextMonthTotalDay,
       };
     },
-    requestMonthMeetingInfo: _.debounce(function () {
+    requestMonthMeetingInfo: debounce(function () {
       this.$api
         .requestMonthMeetingInfo({
           params: { roomId: this.roomId, date: this.date },
@@ -204,6 +205,12 @@ export default {
           "YYYY-MM-DD"
         );
       }
+    },
+    changeToDay: function () {
+      this.$router.push({
+        path: "/meeting/offline/room_day_detail",
+        query: { roomId: this.roomId, date: this.date },
+      });
     },
   },
 };

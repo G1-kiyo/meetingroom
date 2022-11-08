@@ -1,4 +1,4 @@
-import _ from "lodash";
+import {cloneDeep} from "lodash/cloneDeep";
 const deepClone = function(obj,method){
     var newObj = {};
     switch(method){
@@ -8,7 +8,7 @@ const deepClone = function(obj,method){
         case "assign":newObj = Object.assign({},obj);break;
         case "spread":newObj = {...obj};break;
         // 这个挺好的
-        case "lodash":newObj = _.cloneDeep(obj);break;
+        case "lodash":newObj = cloneDeep(obj);break;
         // 相对比较完善
         case "deepClone":newObj = selfDeepClone(obj);break;
         default:break;

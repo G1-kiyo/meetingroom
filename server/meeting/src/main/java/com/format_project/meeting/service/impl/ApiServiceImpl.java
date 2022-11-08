@@ -10,6 +10,7 @@ import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,11 +37,14 @@ import com.format_project.meeting.bean.EmailSenderUtil;
 import com.format_project.meeting.bean.FileProcessing;
 import com.format_project.meeting.bean.JsonResult;
 import com.format_project.meeting.bean.TimerUtil;
+import com.format_project.meeting.bean.Code.Code;
 import com.format_project.meeting.bean.Code.CodeUtil;
 import com.format_project.meeting.mapper.PwdResetMapper;
+import com.format_project.meeting.mapper.RouterMapper;
 import com.format_project.meeting.model.dto.AuthInfo;
 import com.format_project.meeting.model.dto.PwdReset;
 import com.format_project.meeting.model.entity.User;
+import com.format_project.meeting.model.vo.Router;
 import com.format_project.meeting.service.inter.ApiService;
 import com.github.mizosoft.methanol.Methanol;
 import com.github.mizosoft.methanol.MultipartBodyPublisher;
@@ -56,6 +60,8 @@ public class ApiServiceImpl implements ApiService {
     UserDetailsServiceImpl userDetailsServiceImpl;
     @Autowired
     PwdResetMapper pwdResetMapper;
+    @Autowired
+    RouterMapper routerMapper;
     @Autowired
     TimerUtil timerUtil;
     @Autowired
@@ -221,5 +227,9 @@ public class ApiServiceImpl implements ApiService {
         pwdResetMapper.updatePwdByUserId(user.getUserId(), password);
 
     }
-
+    @Override
+    public ArrayList<Router>loadDynamicRouter(){
+        ArrayList<Router> routes = routerMapper.selectDynamicRoutes();
+        return routes;
+    }
 }

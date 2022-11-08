@@ -9,7 +9,8 @@
 <script>
 export default {
   name: "NavigatorItem",
-  props: ["path", "func"],
+  props: ["path", "func", "index"],
+  // emits: ["updateIndex"],
   methods: {
     onClick: function () {
       if (this.path) {
@@ -18,6 +19,8 @@ export default {
       if (this.func) {
         this.func();
       }
+      //通过指令调用父组件的方法
+      this.$parent.updateIndex(this.index);
     },
   },
 };
@@ -26,8 +29,9 @@ export default {
 .horizontal {
   & > .navigator_item {
     display: inline-block;
-    width: 90px;
-    height: 30px;
+    padding: 10px;
+    // width: 90px;
+    // height: 30px;
     text-align: center;
     line-height: 30px;
     &.--active {
@@ -41,21 +45,13 @@ export default {
 }
 .vertical {
   & > .navigator_item {
-    width: 72px;
-    height: 67px;
+    width: 100%;
+    // height: 67px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     &.--active {
-      .iconfont[data-type="1"] {
-        color: #264de8;
-      }
-      .iconfont[data-type="2"] {
-        color: #ff0000;
-      }
-      .text {
-      }
     }
   }
 }
