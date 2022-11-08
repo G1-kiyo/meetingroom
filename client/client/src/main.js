@@ -10,6 +10,7 @@ import api from "./api/Api.js";
 import elFormValidator from './utils/ElFormValidator';
 import dateProcess from "./utils/DateProcess";
 import UserOperationControl from './utils/UserOperationControl';
+import './utils/PxToRem';
 import Vue3Storage from "vue3-storage";
 import "element-plus/dist/index.css";
 import "./assets/css/style.less";
@@ -38,10 +39,13 @@ app.config.globalProperties.$elFormValidator = elFormValidator;
 app.config.globalProperties.$dateProcess = dateProcess;
 app.config.globalProperties.$userOC = UserOperationControl;
 
+
 provide("$api",api);
 provide("$elFormValidator",elFormValidator);
 provide("$dateProces",dateProcess);
 provide("$userOC",UserOperationControl);
+
+
 //全局注册elementplus
 app.use(ElementPlus);
 // 全局注册element plus图标
@@ -63,3 +67,4 @@ app.use(router);
 app.use(store);
 // 挂在在根元素上
 app.mount("#app");
+

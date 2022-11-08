@@ -88,6 +88,7 @@ class Api{
     requestUpcomingOnlineMeeting(requestData){
         return AxiosHttp.get('/online_meeting/upcoming',requestData,false);
     }
+<<<<<<< HEAD
     // 请求预约线上会议
     requestScheduleOnlineMeeting(requestData){
         return AxiosHttp.post('/online_meeting/schedule',requestData,false);
@@ -95,6 +96,12 @@ class Api{
     // 请求线上即时会议唯一ID
     requestPersonalMeetingId(requestData){
         return AxiosHttp.get('/online_meeting/personal_info',requestData,false);
+=======
+
+    // 请求发送邀请邮件
+    requestInvitationWithEmail(requestData){
+        return AxiosHttp.post('/online_meeting/invite',requestData,false);
+>>>>>>> ae7fcb0aee839e8e6cf01671a35bda359b0df29c
     }
 }
 export default new Api();

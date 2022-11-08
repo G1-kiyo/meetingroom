@@ -1,0 +1,242 @@
+.schedule {
+    main {
+        padding: 20px 20px 0 100px;
+        width: 90%;
+        height: 90%;
+        background-color: white;
+        border-radius: 10px;
+        border: none;
+        display: flex;
+        flex-direction: row;
+        position: relative;
+
+        .s-mtlist {
+            flex: 2;
+            justify-content: center;
+            padding: 10px 30px 0 30px;
+
+            .head {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                .h-refresh {
+                    margin-right: 20px;
+                }
+
+                .h-title {
+                    width: 157px;
+                    height: 36px;
+                    border-radius: 3px;
+                    border-color: #CCCCCC;
+                    font-size: 18px;
+                    color: #666DC9;
+                    font-weight: bold;
+                    text-align: center;
+                    line-height: 36px;
+                    margin-right: 20px;
+                }
+
+                .h-invite {}
+            }
+
+            .personalId {
+                margin-top: 10px;
+                padding: 20px 0;
+                width: 100%;
+                height: 100px;
+                border-bottom-style: solid;
+                border-color: #666666;
+
+                &>span:first-child {
+                    display: block;
+                    font-family: "Segoe UI Light";
+                    font-size: 16px;
+                }
+
+                &>span:nth-child(2) {
+                    margin-top: 10px;
+                }
+            }
+
+            .mtlist-con {
+                margin-top: 20px;
+
+                .mtlist-tit {
+                    color: #666666;
+                    font-weight: bold;
+                    font-size: 18px;
+                    display: block;
+                }
+
+                ul {
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 0;
+                    margin-top: 15px;
+                    height: calc(100% - 250px);
+                    overflow-y: scroll;
+
+                    li {
+                        width: 242px;
+                        height: 117px;
+                        border-bottom-style: solid;
+                        border-color: #CCCCCC;
+                        padding-bottom: 15px;
+
+                        .mtlist-con-box {
+                            padding: 13px 0 0 10px;
+                            width: 100%;
+                            height: 100%;
+
+                        }
+                    }
+                }
+            }
+        }
+
+        .m-divider .el-divider--vertical {
+            background-color: #666666;
+            height: 80%;
+        }
+
+        .s-mtinvite {
+            flex: 1;
+            align-items: center;
+            padding-left: 15px;
+
+            .i-time {
+                margin-top: 20px;
+
+                .willst {
+                    margin-left: 10px;
+                    color: #666DC9;
+                }
+            }
+
+            .btn-group {
+                margin-top: 35px;
+
+                .btn {
+                    height: 30px;
+                    text-align: center;
+                    line-height: 30px;
+                }
+
+                .start {
+                    background-color: #1821D7;
+                    color: white;
+                    border: none;
+                    font-weight: bold;
+                    width: 44px;
+
+                }
+
+                .invite {
+                    width: 75px;
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+
+    .invitation {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 518px;
+        height: 278px;
+        margin-left: -259px;
+        margin-top: -189px;
+        border: none;
+        box-shadow: 0 0 10px 3px #CCCCCC;
+        padding: 20px 0 0 15px;
+
+        .close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+        }
+
+        .ind-tit {
+            margin-left: 15px;
+            font-size: 24px;
+            font-family: "Segoe UI Light";
+        }
+
+        .ind-con {
+            margin-top: 25px;
+            padding-left: 40px;
+        }
+
+        .ind-emp {
+            color: #666DC9;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: row;
+
+            .btn {
+                border: none;
+                border-radius: 3px;
+                color: white;
+                text-align: center;
+                height: 32px;
+                line-height: 32px;
+            }
+
+            .copy-link {
+                background-color: #00008B;
+                width: 86px;
+            }
+
+            .copy-id {
+                background-color: #228B22;
+                width: 130px;
+                margin-left: 30px;
+            }
+
+            .send-email {
+                background-color: #666666;
+                width: 86px;
+                margin-left: 30px;
+                &-input{
+                    margin-top:20px;
+                    width:100%;
+                }
+                .in-btn{
+                    width:36px;
+                    height:32px;
+                    display:inline-block;
+                }
+                .operation-select{
+                    border:none;
+                }
+                .operation-send{
+                    border-width:2px;
+                }
+            }
+
+        }
+    }
+}
+
+.txt {
+    display: block;
+}
+
+.topic {
+    display: block;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+.timeperiod {
+    margin-top: 20px;
+}
+
+.meetingId {
+    margin-top: 20px;
+}

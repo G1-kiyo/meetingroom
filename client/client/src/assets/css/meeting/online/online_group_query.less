@@ -1,0 +1,23 @@
+.icon path{
+    stroke:'#438CFF';
+    fill:none;
+    stroke-width:2;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    // 1000没有什么特殊含义，只是足够大，
+    // 保证比比每个路径的长度大即可，你也可以是1500，
+    // 区别就是描边速度更快一点。
+}
+.circle .ani{
+    animation: stroke 2s linear 0.5s;
+}
+.tick .ani{
+    animation:stroke 2s linear 2.5s;
+}
+@keyframes stroke{
+    to{
+        // 增加  逆时针
+        // 减少  顺时针
+        stroke-dashoffset: 0;
+    }
+}

@@ -22,8 +22,16 @@ class DateProcess {
         return format;
     }
     dateDiff(date1, date2, output) {
-        var dateF = new Date(date1).getTime();
-        var dateN = new Date(date2).getTime();
+        if(!(date1 instanceof Date)){
+            var dateF = new Date(date1).getTime();
+        }else{
+            dateF = date1;
+        }
+        if(!(date2 instanceof Date)){
+            var dateN = new Date(date2).getTime();
+        }else{
+            dateN = date2;
+        }
         var result;
         switch (output) {
             case "second": result = Math.abs((dateF - dateN) / (1000)); break;

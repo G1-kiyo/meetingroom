@@ -10,6 +10,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^1.1.4",
     "axios": "^0.26.1",
+    "clipboard": "^2.0.11",
     "core-js": "^3.8.3",
     "element-plus": "^2.1.10",
     "file-loader": "^6.2.0",
@@ -21,6 +22,7 @@
     "lodash": "^4.17.21",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "npm": "^8.19.2",
+    "postcss-pxtorem": "^6.0.0",
     "qs": "^6.9.7",
     "swiper": "^8.4.2",
     "url-loader": "^4.1.1",

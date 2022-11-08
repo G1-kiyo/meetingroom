@@ -32,4 +32,18 @@ public class EmailSenderUtil {
         
 
     }
+    public void sendMultipleMails(String[]to,String subject,String content){
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message,"UTF-8");
+        try{
+            mimeMessageHelper.setFrom(from);
+            mimeMessageHelper.setTo(to);
+            mimeMessageHelper.setSubject(subject);
+            // 表示所发送的文本内容是html格式的
+            mimeMessageHelper.setText(content, true);
+            javaMailSender.send(message);
+        }catch(MessagingException e){
+            e.printStackTrace();
+        }
+    }
 }
