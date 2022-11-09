@@ -91,8 +91,8 @@
 </template>
 
 <script>
-import TagWidget from "../../components/TagWidget";
-import BlankPage from "../../components/BlankPage";
+import TagWidget from "@/components/TagWidget";
+import BlankPage from "@/views/warn/BlankPage";
 import { ElMessage } from "element-plus";
 export default {
   name: "RequestPasswordReset",

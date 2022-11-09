@@ -11,7 +11,7 @@ var browser = {
             webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
             gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,//火狐内核
             mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-            ios: !!u.match(/(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+            ios: !!u.match(/(i[^;]+;\( U;)? CPU.+Mac OS X/), //ios终端
             android: u.indexOf('Android') > -1 || u.indexOf('Adr') > -1, //android终端
             iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
             iPad: u.indexOf('iPad') > -1, //是否iPad
